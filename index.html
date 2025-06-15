@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demande de Transfert d'Argent - Cash MoMO</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+        }
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 2.2em;
+            font-weight: bold;
+        }
+        .header p {
+            margin: 10px 0 0 0;
+            opacity: 0.9;
+            font-size: 1.1em;
+        }
+        .form-content {
+            padding: 30px;
+        }
+        .section-title {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 12px 20px;
+            margin: 30px -30px 20px -30px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+        .section-title:first-child {
+            margin-top: 0;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+            font-size: 0.95em;
+        }
+        .required {
+            color: #e74c3c;
+        }
+        input[type="text"], 
+        input[type="email"], 
+        input[type="tel"], 
+        input[type="number"],
+        input[type="date"],
+        select, 
+        textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: border-color 0.3s ease;
+            box-sizing: border-box;
+        }
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #FF6B35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+        .radio-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .radio-option {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 15px;
+            border: 2px solid #e1e8ed;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .radio-option:hover {
+            border-color: #FF6B35;
+            background-color: #fff5f3;
+        }
+        .radio-option.selected {
+            border-color: #FF6B35;
+            background-color: #fff5f3;
+        }
+        .radio-option input[type="radio"] {
+            margin: 0;
+        }
+        .amount-display {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 8px;
+            border: 2px solid #e1e8ed;
+            text-align: center;
+            font-weight: bold;
+            color: #FF6B35;
+            font-size: 1.1em;
+        }
+        .submit-btn {
+            background: linear-gradient(135deg, #FF6B35, #F7931E);
+            color: white;
+            padding: 18px 40px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.2em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(255, 107, 53, 0.3);
+        }
+        .footer-note {
+            background-color: #f8f9fa;
+            padding: 20px;
+            text-align: center;
+            color: #666;
+            font-size: 0.9em;
+            border-top: 1px solid #e1e8ed;
+        }
+        .info-box {
+            background: #e8f4fd;
+            border-left: 4px solid #2196F3;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 0 8px 8px 0;
+        }
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            .radio-group {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>💸 Cash MoMO</h1>
+            <p>Demande de Transfert d'Argent - Rapide, Sûr, Fiable</p>
+        </div>
+        
+        <form class="form-content">
+            <div class="section-title">📋 Type de Transaction</div>
+            
+            <div class="form-group">
+                <label>Je souhaite <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="envoyer" name="type_transaction" value="envoyer" required>
+                        <label for="envoyer">📤 Envoyer de l'argent</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="recevoir" name="type_transaction" value="recevoir" required>
+                        <label for="recevoir">📥 Recevoir de l'argent</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">👤 Vos Informations Personnelles</div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nom">Nom complet <span class="required">*</span></label>
+                    <input type="text" id="nom" name="nom" required>
+                </div>
+                <div class="form-group">
+                    <label for="date_naissance">Date de naissance <span class="required">*</span></label>
+                    <input type="date" id="date_naissance" name="date_naissance" required>
+                </div>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="telephone">Numéro de téléphone <span class="required">*</span></label>
+                    <input type="tel" id="telephone" name="telephone" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Adresse e-mail</label>
+                    <input type="email" id="email" name="email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="adresse">Adresse complète <span class="required">*</span></label>
+                <textarea id="adresse" name="adresse" rows="3" required></textarea>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="piece_identite">Type de pièce d'identité <span class="required">*</span></label>
+                    <select id="piece_identite" name="piece_identite" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="cni">Carte Nationale d'Identité</option>
+                        <option value="passeport">Passeport</option>
+                        <option value="permis">Permis de conduire</option>
+                        <option value="autre">Autre document officiel</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="numero_piece">Numéro de la pièce <span class="required">*</span></label>
+                    <input type="text" id="numero_piece" name="numero_piece" required>
+                </div>
+            </div>
+
+            <div class="section-title">💰 Détails de la Transaction</div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="montant">Montant <span class="required">*</span></label>
+                    <input type="number" id="montant" name="montant" min="1" step="0.01" required>
+                </div>
+                <div class="form-group">
+                    <label for="devise">Devise <span class="required">*</span></label>
+                    <select id="devise" name="devise" required>
+                        <option value="">Sélectionnez</option>
+                        <option value="XAF">FCFA (XAF)</option>
+                        <option value="EUR">Euro (EUR)</option>
+                        <option value="USD">Dollar US (USD)</option>
+                        <option value="GBP">Livre Sterling (GBP)</option>
+                        <option value="CAD">Dollar Canadien (CAD)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="motif">Motif du transfert <span class="required">*</span></label>
+                <select id="motif" name="motif" required>
+                    <option value="">Sélectionnez le motif</option>
+                    <option value="famille">Support familial</option>
+                    <option value="etudes">Frais d'études</option>
+                    <option value="medical">Frais médicaux</option>
+                    <option value="commercial">Transaction commerciale</option>
+                    <option value="investissement">Investissement</option>
+                    <option value="cadeau">Cadeau</option>
+                    <option value="autre">Autre</option>
+                </select>
+            </div>
+
+            <div class="section-title">👥 Informations du Destinataire/Expéditeur</div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="nom_contact">Nom complet <span class="required">*</span></label>
+                    <input type="text" id="nom_contact" name="nom_contact" required>
+                </div>
+                <div class="form-group">
+                    <label for="telephone_contact">Numéro de téléphone <span class="required">*</span></label>
+                    <input type="tel" id="telephone_contact" name="telephone_contact" required>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="pays_contact">Pays de résidence <span class="required">*</span></label>
+                <select id="pays_contact" name="pays_contact" required>
+                    <option value="">Sélectionnez le pays</option>
+                    <option value="CM">Cameroun</option>
+                    <option value="FR">France</option>
+                    <option value="BE">Belgique</option>
+                    <option value="CH">Suisse</option>
+                    <option value="CA">Canada</option>
+                    <option value="US">États-Unis</option>
+                    <option value="UK">Royaume-Uni</option>
+                    <option value="DE">Allemagne</option>
+                    <option value="IT">Italie</option>
+                    <option value="ES">Espagne</option>
+                    <option value="autre">Autre pays</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="ville_contact">Ville de résidence <span class="required">*</span></label>
+                <input type="text" id="ville_contact" name="ville_contact" required>
+            </div>
+
+            <div class="section-title">🏦 Mode de Réception/Envoi</div>
+
+            <div class="form-group">
+                <label>Mode de réception/envoi souhaité <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="especes" name="mode_reception" value="especes" required>
+                        <label for="especes">💵 Espèces (en agence)</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="mobile_money" name="mode_reception" value="mobile_money" required>
+                        <label for="mobile_money">📱 Mobile Money</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="compte_bancaire" name="mode_reception" value="compte_bancaire" required>
+                        <label for="compte_bancaire">🏦 Compte bancaire</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" id="agence_section" style="display: none;">
+                <label for="agence_proche">Agence Cash MoMO la plus proche <span class="required">*</span></label>
+                <select id="agence_proche" name="agence_proche">
+                    <option value="">Sélectionnez une agence</option>
+                    <option value="douala_centre">Douala Centre</option>
+                    <option value="douala_bonanjo">Douala Bonanjo</option>
+                    <option value="yaounde_centre">Yaoundé Centre</option>
+                    <option value="yaounde_mfoundi">Yaoundé Mfoundi</option>
+                    <option value="bafoussam">Bafoussam</option>
+                    <option value="bamenda">Bamenda</option>
+                    <option value="garoua">Garoua</option>
+                </select>
+            </div>
+
+            <div class="form-group" id="mobile_section" style="display: none;">
+                <label for="numero_mobile">Numéro Mobile Money <span class="required">*</span></label>
+                <input type="tel" id="numero_mobile" name="numero_mobile">
+            </div>
+
+            <div class="form-group" id="banque_section" style="display: none;">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nom_banque">Nom de la banque <span class="required">*</span></label>
+                        <input type="text" id="nom_banque" name="nom_banque">
+                    </div>
+                    <div class="form-group">
+                        <label for="numero_compte">Numéro de compte <span class="required">*</span></label>
+                        <input type="text" id="numero_compte" name="numero_compte">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">💳 Mode de Paiement</div>
+
+            <div class="form-group">
+                <label>Comment souhaitez-vous payer ? <span class="required">*</span></label>
+                <div class="radio-group">
+                    <div class="radio-option">
+                        <input type="radio" id="especes_paiement" name="mode_paiement" value="especes" required>
+                        <label for="especes_paiement">💵 Espèces</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="mobile_paiement" name="mode_paiement" value="mobile_money" required>
+                        <label for="mobile_paiement">📱 Mobile Money</label>
+                    </div>
+                    <div class="radio-option">
+                        <input type="radio" id="virement" name="mode_paiement" value="virement" required>
+                        <label for="virement">🏦 Virement bancaire</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>ℹ️ Information importante :</strong><br>
+                Les frais de transaction seront calculés et affichés avant la confirmation finale. 
+                Tous les transferts sont sécurisés et tracés pour votre protection.
+            </div>
+
+            <div class="form-group">
+                <label for="commentaires">Commentaires ou instructions spéciales</label>
+                <textarea id="commentaires" name="commentaires" rows="3" placeholder="Toute information supplémentaire que vous souhaitez nous communiquer..."></textarea>
+            </div>
+
+            <button type="submit" class="submit-btn">
+                🚀 Soumettre ma demande de transfert
+            </button>
+        </form>
+
+        <div class="footer-note">
+            <p><strong>📞 Besoin d'aide ?</strong><br>
+            Contactez-nous au : <strong>+237 690 70 94 66</strong><br>
+            Email : <strong>CashService@gmail.com</strong><br>
+            💼 <em>Cash MoMO - Facilité vous la vie</em></p>
+        </div>
+    </div>
+
+    <script>
+        // Gestion de l'affichage conditionnel des sections
+        document.querySelectorAll('input[name="mode_reception"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                // Cacher toutes les sections
+                document.getElementById('agence_section').style.display = 'none';
+                document.getElementById('mobile_section').style.display = 'none';
+                document.getElementById('banque_section').style.display = 'none';
+                
+                // Afficher la section correspondante
+                if (this.value === 'especes') {
+                    document.getElementById('agence_section').style.display = 'block';
+                } else if (this.value === 'mobile_money') {
+                    document.getElementById('mobile_section').style.display = 'block';
+                } else if (this.value === 'compte_bancaire') {
+                    document.getElementById('banque_section').style.display = 'block';
+                }
+            });
+        });
+
+        // Style des boutons radio
+        document.querySelectorAll('.radio-option').forEach(option => {
+            option.addEventListener('click', function() {
+                const radio = this.querySelector('input[type="radio"]');
+                radio.checked = true;
+                
+                // Enlever la classe selected de tous les options du même groupe
+                const groupName = radio.name;
+                document.querySelectorAll(`input[name="${groupName}"]`).forEach(r => {
+                    r.closest('.radio-option').classList.remove('selected');
+                });
+                
+                // Ajouter la classe selected à l'option actuelle
+                this.classList.add('selected');
+                
+                // Déclencher l'événement change
+                radio.dispatchEvent(new Event('change'));
+            });
+        });
+
+        // Gestion de la soumission du formulaire
+        document.querySelector('form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('✅ Votre demande de transfert a été envoyée avec succès !\n\nNotre équipe va traiter votre demande et vous contacter dans les plus brefs délais.\n\nRéférence de la demande : TXN' + Date.now());
+        });
+
+        // Calcul automatique des frais (simulation)
+        document.getElementById('montant').addEventListener('input', function() {
+            const montant = parseFloat(this.value) || 0;
+            const frais = Math.max(500, montant * 0.02); // 2% avec minimum 500 FCFA
+            
+            if (montant > 0) {
+                const total = montant + frais;
+                console.log(`Montant: ${montant}, Frais: ${frais}, Total: ${total}`);
+            }
+        });
+    </script>
+</body>
+</html>
